@@ -1,12 +1,14 @@
 package com.example.android.giphyapp.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Debug;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -68,6 +70,20 @@ public class MainGifActivity extends AppCompatActivity {
 
         adapter = new GifArrayAdapter(this, gifs);
         gvResults.setAdapter(adapter);
+
+        gvResults.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(getApplicationContext(), GifActivity.class);
+
+                Gif gif = gifs.get(position);
+                i.putExtra("url", gif.getUrl());
+
+                startActivity(i);
+
+            }
+
+        });
     }
 
     public void onGifSearch(View view) {
