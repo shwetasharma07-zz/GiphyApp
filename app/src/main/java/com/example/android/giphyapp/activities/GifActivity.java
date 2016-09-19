@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Display;
+import android.view.View;
 import android.view.WindowManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -21,6 +22,15 @@ public class GifActivity extends AppCompatActivity {
 
         String url = getIntent().getStringExtra("url");
         WebView webView = (WebView) findViewById(R.id.overlayGif);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                findViewById(R.id.placeholderImage).setVisibility(View.GONE);
+                findViewById(R.id.overlayGif).setVisibility(View.VISIBLE);
+
+            }
+        });
 
         webView.loadUrl(url);
         TextView textView = (TextView) findViewById(R.id.urlText);
