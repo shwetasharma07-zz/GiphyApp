@@ -22,16 +22,10 @@ public class GifActivity extends AppCompatActivity {
         String url = getIntent().getStringExtra("url");
         WebView webView = (WebView) findViewById(R.id.overlayGif);
 
-//        webView.setWebViewClient(new WebViewClient() {
-//            @Override
-//            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-//                view.loadUrl(url);
-//                return true;
-//            }
-//        });
-
         webView.loadUrl(url);
         TextView textView = (TextView) findViewById(R.id.urlText);
         textView.setText(url);
+        webView.getSettings().setUseWideViewPort(true);
+        webView.getSettings().setLoadWithOverviewMode(true);
     }
 }
