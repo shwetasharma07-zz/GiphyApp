@@ -34,7 +34,7 @@ public class GifActivity extends AppCompatActivity {
 
         webView.loadUrl(url);
         TextView textView = (TextView) findViewById(R.id.urlText);
-        textView.setText(url);
+        textView.setText("Link to Gif here: " + url);
         webView.getSettings().setUseWideViewPort(true);
         webView.getSettings().setLoadWithOverviewMode(true);
     }
