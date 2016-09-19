@@ -50,6 +50,7 @@ public class MainGifActivity extends AppCompatActivity {
 
         RequestParams parameters = new RequestParams();
         parameters.put("api_key", "dc6zaTOxFJmzC");
+        parameters.put("limit", "28");
 
         client.get(url, parameters, new JsonHttpResponseHandler() {
             @Override
