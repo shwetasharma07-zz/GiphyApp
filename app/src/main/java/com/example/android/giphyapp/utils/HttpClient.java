@@ -15,6 +15,9 @@ import com.loopj.android.http.RequestParams;
     }
 
     public void getSearchGifs(int offset, String searchQuery, JsonHttpResponseHandler responseHandler) {
+        if (searchQuery == "" || searchQuery == null) {
+            getTrendingGifs(offset, responseHandler);
+        }
         RequestParams parameters = new RequestParams();
         parameters.put("api_key", "dc6zaTOxFJmzC");
         parameters.put("q", searchQuery);

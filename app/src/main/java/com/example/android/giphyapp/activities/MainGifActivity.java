@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import com.example.android.giphyapp.EndlessScrollListener;
 import com.example.android.giphyapp.GifArrayAdapter;
@@ -101,6 +102,7 @@ public class MainGifActivity extends AppCompatActivity {
     public void loadGiphyApiSearch(int offset) {
         int newOffset = offset * MAX_GIFS_IN_RESPONSE;
         String searchQuery = etQuery.getText().toString();
+
         JsonHttpResponseHandler jsonHttpResponseHandler = new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -110,6 +112,12 @@ public class MainGifActivity extends AppCompatActivity {
                 adapter.addAll(gifArrayList);
             }
         };
-        httpClient.getSearchGifs(newOffset, searchQuery, jsonHttpResponseHandler);
+        if (searchQuery.isEmpty()) {
+            httpClient.getTrendingGifs(offset,jsonHttpResponseHandler);
+            Toast.makeText(MainGifActivity.this, "Invalid Search!", Toast.LENGTH_SHORT).show();
+        } else {
+            httpClient.getSearchGifs(newOffset, searchQuery, jsonHttpResponseHandler);
+        }
+
     }
 }
