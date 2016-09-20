@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
@@ -28,10 +29,14 @@ public class GifActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gif);
 
+
         String url = getIntent().getStringExtra("url");
 
         ImageView imageView = (ImageView) findViewById(R.id.overlayGif);
         Glide.with(this).load(url).asGif().diskCacheStrategy(DiskCacheStrategy.SOURCE).placeholder(R.mipmap.ic_launcher).centerCrop().into(imageView);
+
+        TextView textView = (TextView) findViewById(R.id.urlText);
+        textView.setText(url);
 
     }
 }
