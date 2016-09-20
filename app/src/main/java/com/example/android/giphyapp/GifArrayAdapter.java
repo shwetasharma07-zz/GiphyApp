@@ -8,8 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.android.giphyapp.models.Gif;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -35,8 +36,7 @@ public class GifArrayAdapter extends ArrayAdapter<Gif> {
         imageView.setImageResource(0);
 
         String url = gif.getUrl();
-        Picasso.with(getContext()).load(url).into(imageView);
-        Picasso.with(getContext()).load(url).fit().placeholder(R.mipmap.ic_launcher).into(imageView);
+        Glide.with(getContext()).load(url).centerCrop().diskCacheStrategy(DiskCacheStrategy.SOURCE).placeholder(R.mipmap.ic_launcher).into(imageView);
 
         return convertView;
 
