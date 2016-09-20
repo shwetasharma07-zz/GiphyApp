@@ -1,6 +1,8 @@
 package com.example.android.giphyapp.activities;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Display;
@@ -10,8 +12,13 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.example.android.giphyapp.R;
 
 public class GifActivity extends AppCompatActivity {
@@ -22,23 +29,9 @@ public class GifActivity extends AppCompatActivity {
         setContentView(R.layout.activity_gif);
 
         String url = getIntent().getStringExtra("url");
-        WebView webView = (WebView) findViewById(R.id.overlayGif);
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.setWebViewClient(new WebViewClient() {
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                findViewById(R.id.placeholderImage).setVisibility(View.GONE);
-                findViewById(R.id.overlayGif).setVisibility(View.VISIBLE);
 
-            }
-        });
+        ImageView imageView = (ImageView) findViewById(R.id.overlayGif);
+        Glide.with(this).load(url).asGif().diskCacheStrategy(DiskCacheStrategy.SOURCE).placeholder(R.mipmap.ic_launcher).centerCrop().into(imageView);
 
-        webView.loadUrl(url);
-        TextView textView = (TextView) findViewById(R.id.urlText);
-        textView.setText("Link to Gif here: " + url);
-        webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
-        webView.getSettings().setLoadWithOverviewMode(true);
-        webView.getSettings().setUseWideViewPort(true);
-        webView.getSettings().setJavaScriptEnabled(true);
     }
 }

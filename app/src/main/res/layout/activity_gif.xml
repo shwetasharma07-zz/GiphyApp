@@ -11,19 +11,10 @@
     tools:context="com.example.android.giphyapp.activities.GifActivity">
 
     <ImageView
-        android:id="@+id/placeholderImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="visible"
-        android:src="@mipmap/ic_launcher"/>
-
-    <WebView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/overlayGif"
-        android:visibility="gone"
-        android:layout_above="@+id/urlText"></WebView>
+        android:layout_above="@+id/urlText"></ImageView>
 
     <TextView
         android:layout_width="wrap_content"
