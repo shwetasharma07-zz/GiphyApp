@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.EditText;
@@ -35,7 +36,9 @@ public class GifActivity extends AppCompatActivity {
         webView.loadUrl(url);
         TextView textView = (TextView) findViewById(R.id.urlText);
         textView.setText("Link to Gif here: " + url);
-        webView.getSettings().setUseWideViewPort(true);
+        webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
         webView.getSettings().setLoadWithOverviewMode(true);
+        webView.getSettings().setUseWideViewPort(true);
+        webView.getSettings().setJavaScriptEnabled(true);
     }
 }
