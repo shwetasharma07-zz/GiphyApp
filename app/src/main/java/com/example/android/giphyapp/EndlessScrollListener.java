@@ -8,7 +8,7 @@ import android.widget.AbsListView.OnScrollListener;
  */
 public abstract class EndlessScrollListener implements OnScrollListener {
 
-    private int visibleThreshold = 5;
+    private int visibleThreshold = 4;
     private int currentPage = 0;
     // The total number of items in the dataset after the last load
     private int previousTotalItemCount = 0;
@@ -17,22 +17,10 @@ public abstract class EndlessScrollListener implements OnScrollListener {
     // Sets the starting page index
     private int startingPageIndex = 0;
 
-    public EndlessScrollListener() {
-    }
-
-//    public EndlessScrollListener(int visibleThreshold) {
-//        this.visibleThreshold = visibleThreshold;
-//    }
-//
-//    public EndlessScrollListener(int visibleThreshold, int startPage) {
-//        this.visibleThreshold = visibleThreshold;
-//        this.startingPageIndex = startPage;
-//        this.currentPage = startPage;
-//    }
+    public EndlessScrollListener() { }
 
     @Override
-    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount)
-    {
+    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
         // If the total item count is zero and the previous isn't, assume the
         // list is invalidated and should be reset back to initial state
         if (totalItemCount < previousTotalItemCount) {
@@ -53,11 +41,12 @@ public abstract class EndlessScrollListener implements OnScrollListener {
         // the visibleThreshold and need to reload more data.
         // If we do need to reload some more data, we execute onLoadMore to fetch the data.
         if (!loading && (firstVisibleItem + visibleItemCount + visibleThreshold) >= totalItemCount ) {
-            loading = onLoadMore(currentPage, totalItemCount);
+            onLoadMore(currentPage);
+            loading = true;
         }
     }
 
-    public abstract boolean onLoadMore(int page, int totalItemsCount);
+    public abstract void onLoadMore(int page);
 
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {

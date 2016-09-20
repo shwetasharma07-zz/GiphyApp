@@ -9,12 +9,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by shwetasharma on 16-09-17.
- */
-public class GifBuilder {
+public class GiphyResponseParser {
 
-    public List<Gif> build(JSONObject responseJson) {
+    public List<Gif> parseForGifs(JSONObject responseJson) {
         List<Gif> gifArrayList = new ArrayList<>();
         try {
             JSONArray data = responseJson.getJSONArray("data");
