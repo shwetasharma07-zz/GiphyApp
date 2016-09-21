@@ -3,12 +3,9 @@ package com.example.android.giphyapp;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 
-/**
- * Created by shwetasharma on 16-09-18.
- */
 public abstract class EndlessScrollListener implements OnScrollListener {
 
-    private int visibleThreshold = 4;
+    private int visibleThreshold = 4; //4 rows
     private int currentPage = 0;
     // The total number of items in the dataset after the last load
     private int previousTotalItemCount = 0;
